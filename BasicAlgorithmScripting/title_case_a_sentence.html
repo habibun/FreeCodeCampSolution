@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title Case a Sentence</title>
+    <script>
+        function titleCase(str) {
+            var newTitle = str.split(' ');
+            var updatedTitle = [];
+            for(var st in newTitle){
+                updatedTitle[st] = newTitle[st].toLowerCase().charAt(0).toUpperCase()+ newTitle[st].substr(1, newTitle[st].length).toLowerCase();
+
+            }
+
+            return updatedTitle.join(' ');
+        }
+
+        titleCase("sHoRt AnD sToUt");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
