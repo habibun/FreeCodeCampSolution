@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check for Palindromes</title>
+    <script>
+        function palindrome(str) {
+            // Good luck!
+            return str.replace(/[\W_]/g, "").toLowerCase() === str.replace(/[\W_]/g, "").toLowerCase().split("").reverse().join("");
+        }
+
+        palindrome("not a palindrome");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
