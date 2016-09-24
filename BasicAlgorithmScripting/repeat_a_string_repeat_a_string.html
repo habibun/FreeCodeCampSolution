@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repeat a string repeat a string</title>
+    <script>
+        function repeatStringNumTimes(str, num) {
+            var repeatedString;
+            if(num <= 0){
+                repeatedString = "";
+            } else {
+                repeatedString = str.repeat(num);
+            }
+            return repeatedString;
+        }
+
+        repeatStringNumTimes("abc", 3);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
