@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm the Ending</title>
+    <script>
+        function confirmEnding(str, target) {
+            var strLength = str.length;
+            var targetLength = target.length;
+            str = str.substring(strLength, strLength - targetLength) == target;
+            console.log(str);
+        }
+        confirmEnding("He has to give me a new name", "name");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
