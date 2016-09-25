@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Truncate a string</title>
+    <script>
+        function truncateString(str, num) {
+            var strLength = str.length;
+            var newStr;
+            if(strLength > num){
+                if(num <= 3){
+                    newStr = str.slice(0, num) + "...";
+                } else {
+                    newStr = str.slice(0, num - 3) + "...";
+                }
+                return newStr;
+            }
+            return str;
+        }
+
+        truncateString("A-tisket a-tasket A green and yellow basket", 11);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
