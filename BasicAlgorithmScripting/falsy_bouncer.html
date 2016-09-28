@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Falsy Bouncer</title>
+    <script>
+        function bouncer(arr) {
+            var newArray = [];
+            function checkFalseValue(value){
+                if(Boolean(value)){
+                    newArray.push(value);
+                }
+            }
+            arr.filter(checkFalseValue);
+            console.log(newArray);
+        }
+        bouncer([7, "ate", "", false, 9]);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
