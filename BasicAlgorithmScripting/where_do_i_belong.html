@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Where do I belong</title>
+    <script>
+        function getIndexToIns(arr, num) {
+            arr.sort(function(a, b){
+               return a-b;
+            });
+            var test = 0;
+            for(var i = 0; i < arr.length; i++) {
+                   if(arr[i] >= num){
+                       test = i;
+                       break;
+                   } else{
+                       test = arr.length;
+                   }
+            }
+            return test;
+        }
+        getIndexToIns([2, 5, 10], 15);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
