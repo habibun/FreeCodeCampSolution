@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show the Local Weather</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+</head>
+<body>
+<!--html-->
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="mdl-layout">
+            <div class="mdl-layout__content">
+                <div class="mdl-typography--display-1-color-contrast">
+                    Show the Local Weather
+                </div>
+                <ul class='mdl-list'>
+                    <li class="mdl-list__item">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="city"></button>
+                    </li>
+                    <li class="mdl-list__item">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="country"></button>
+                    </li>
+                    <li class="mdl-list__item">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="weatherType"></button>
+                    </li>
+                    <li class="mdl-list__item">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="fTemp"></button>
+                    </li>
+                    <li class="mdl-list__item">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" id="windSpeed"></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+</div>
+
+
+<!--end html-->
+
+<!--js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var lat, lon, kTemp, fTemp, cTemp, tempSwap = true;
+
+        $.getJSON("http://ip-api.com/json", function (data2) {
+            lat = data2.lat;
+            lon = data2.lon;
+            var api = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=191c73ad43e208b88cfc6d37d8de7fed';
+
+            $.getJSON(api, function (data) {
+                var weatherType = data.weather[0].main;
+                var windSpeed = data.wind.speed;
+                var city = data2.city;
+                var country = data2.country;
+
+                kTemp = data.main.temp;
+                fTemp = ((kTemp) * (9 / 5) - 459.67).toFixed(2);
+                cTemp = (kTemp - 273).toFixed(2);
+                windSpeed = (2.237 * (windSpeed)).toFixed(2);
+
+                $('#city').html(city);
+                $('#weatherType').html(weatherType);
+                $('#fTemp').html(fTemp + " &#8457;");
+                $('#windSpeed').html(windSpeed + " mph");
+                $('#country').html(country);
+
+                $('#fTemp').on("click", function () {
+                    if (tempSwap) {
+                        $('#fTemp').html(cTemp + " &#8451;");
+                        tempSwap = false;
+                    } else {
+                        $('#fTemp').html(fTemp + " &#8457;");
+                        tempSwap = true;
+                    }
+                });
+                if(fTemp > 80){
+                    $('body').css({
+                        'background-image': 'url("http://i.imgur.com/5tFHSKa.jpg")','background-size':'1280px 800px'});
+                } else if (fTemp > 70){
+                    $('body').css({'background-image': 'url("http://i.imgur.com/5tFHSKa.jpg")','background-size':'1280px 800px'});
+                }
+            });
+        });
+    });
+</script>
+<!--end js-->
+</body>
+</html>
