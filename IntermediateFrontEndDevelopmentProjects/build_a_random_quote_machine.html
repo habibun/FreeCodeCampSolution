@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build a Random Quote Machine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <style>
+        .quote-card-wide.mdl-card {
+            width: 50%;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .quote-card-wide > .mdl-card__title {
+            color: #fff;
+        }
+
+        .quote-card-wide > .mdl-card__supporting-text {
+            font-size: 1.2em;
+        }
+
+        .quote-card-wide > .mdl-card__supporting-text p {
+            font-size: 1.2em;
+        }
+
+        .quote-card-wide > .mdl-card__actions {
+
+        }
+
+        #newQuote {
+            float: right;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<div class="quote-card-wide mdl-card mdl-shadow--4dp">
+    <div class="mdl-card__supporting-text">
+        <p><i class="material-icons">format_quote</i><span id="generateQuote"></span></p>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-typography--text-right">
+            - <span id="generateAuthor"></span>
+        </div>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="tweet">
+            <img src="https://www.gstatic.com/images/icons/material/system/2x/post_twitter_black_24dp.png">
+        </a>
+        <div class="mdl-tooltip" data-mdl-for="tweet">
+            Tweet this quote!
+        </div>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="newQuote">
+            New quote
+        </a>
+    </div>
+</div>
+
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script>
+    var randomQuote, randomAuthor;
+    getQuote();
+
+    function getQuote(){
+        var quote = ["this is a test1", "this is a test2", "this is a test3"];
+        var author = ["author1", "author2", "author3"];
+
+        var ra = Math.floor(Math.random() * quote.length);
+
+        randomQuote = quote[ra];
+        randomAuthor = author[ra];
+
+        document.getElementById('generateQuote').innerHTML = randomQuote;
+        document.getElementById('generateAuthor').innerHTML = randomAuthor;
+    };
+
+    document.getElementById("newQuote").addEventListener("click", function(){
+        getQuote();
+    });
+
+    document.getElementById("tweet").addEventListener("click", function(){
+        window.open(href="https://twitter.com/intent/tweet?text="+ randomQuote + "      -" + randomAuthor);
+    });
+</script>
+</body>
+</html>
