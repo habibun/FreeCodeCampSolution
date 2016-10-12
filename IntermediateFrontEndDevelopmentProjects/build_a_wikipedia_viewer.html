@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build a Wikipedia Viewer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <style>
+        ul a {
+             color: black;
+             font-weight: 500;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout">
+        <main class="mdl-layout__content">
+            <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text mdl-typography--text-center">
+                        <div>
+                            <button type="button" class="mdl-chip" id="random">
+                                <span class="mdl-chip__text">Click here for a random article</span>
+                            </button>
+                        </div>
+                        <div>
+                            <form id="searchForm" action="#">
+                                <span>Click icon to search</span>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
+                                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <div class="mdl-textfield__expandable-holder">
+                                    <input class="mdl-textfield__input" type="text" id="search">
+                                    <label class="mdl-textfield__label" for="search">
+                                        Enter search text below
+                                    </label>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <ul class="mdl-list">
+            </ul>
+        </main>
+    </div>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script>
+        document.getElementById("random").addEventListener("click", function() {
+           window.open("https://en.wikipedia.org/wiki/Special:Random");
+        });
+
+        document.getElementById("searchForm").onsubmit = function(evt){
+
+            evt.preventDefault();
+
+            var searchTerm = document.getElementById("search").value;
+            var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ searchTerm +"&format=json&callback=?";
+
+            /*var httpRequest = new XMLHttpRequest();
+
+            if (!httpRequest) {
+                alert('Giving up :( Cannot create an XMLHTTP instance');
+                return false;
+            }
+
+            httpRequest.onreadystatechange = function () {
+                try {
+                    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                        if (httpRequest.status === 200) {
+//                            console.log(httpRequest.response);
+//                            var response = JSON.parse(httpRequest.response);
+//                            alert(response[1][0]);
+                            var test = JSON.stringify(httpRequest.responseText);
+                            var jony = JSON.parse(test);
+                            console.log(jony);
+                            console.log(jony[2][0]);
+                        } else {
+                            alert('There was a problem with the request.');
+                        }
+                    }
+                }
+                catch( e ) {
+                    alert('Caught Exception: ' + e.description);
+                }
+            };
+            httpRequest.open('GET', url, true);
+            httpRequest.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+            httpRequest.send();*/
+
+            $(".mdl-list").html("");
+            $.ajax({
+                type:"GET",
+                url:url,
+                async:false,
+                dataType:"json",
+                success: function(data){
+                    console.log(data);
+                    for(var i = 0; i < data[1].length; i++){
+                        $(".mdl-list").prepend("" +
+                                "<li class='mdl-list__item mdl-list__item--three-line'>" +
+                                "<span class='mdl-list__item-primary-content'><span>" +
+                                "<a href= " + data[3][i] + ">"+data[1][i]+ "</a>" +
+                                "</span>" +
+                                "<span class='mdl-list__item-text-body'>" + data[2][i] + "</span>" +
+                                "</span>");
+                    }
+                },
+                error: function(errorMessage){
+                    alert("Error");
+                }
+            });
+        };
+    </script>
+
+</body>
+</html>
