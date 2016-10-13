@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>build-a-personal-portfolio-webpage</title>
+    <style>
+        .container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="container" data-spy="scroll" data-target="#navbar-example">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    qlip
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-example">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row" style="margin-top: 60px;" id="about">
+        <div class="col-md-8">
+            <p class="lead">I believe that, with my skills, experience and attitudes, I can bring a lot to the company and am excited about the prospect. My background is in web development but in the past few years I have turned my focus to web design and hope to develop my career further within a design agency.</p>
+            <p>I enjoy working in a team. At university I offered my IT/design skills to the Chinese Club and I was an IT volunteer at the 2006 Commonwealth Games. I regularly volunteer some time to the RSPCA for their web design/development needs.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="https://www.dropbox.com/s/wgfku0ahtoxtr35/images.jpg?raw=1" alt="..." class="img-circle">
+        </div>
+    </div>
+    <hr>
+    <div class="row" id="portfolio">
+        <div class="page-header">
+            <h1 class="text-center">PORTFOLIO</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+        <div class="col-md-6">
+            <img src="https://www.dropbox.com/s/mvy6uvz2auu4boc/Screenshot%20from%202016-05-02%2020%3A18%3A40.png?raw=1" class="img-responsive" alt="Responsive image">
+        </div>
+    </div>
+    <hr>
+    <div class="row" id="contact">
+        <div class="page-header">
+            <h1 class="text-center">CONTACT ME</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="email" class="form-control" id="name" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" rows="3" id="message"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-default">Send</button>
+            </form>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;">
+            <p class="lead">Just fill out the form below and it will send us an e-mail. And Don't worry about your e-mail in any way. I promise to only use your e-mail to answer any questions that you have.</p>
+        </div>
+    </div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.container').scrollspy({ target: '#navbar-example' })
+    });
+</script>
+</body>
+</html>
