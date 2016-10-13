@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Use the Twitchtv JSON API</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout">
+    <div class="mdl-layout__content">
+        <div class="mdl-grid">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell mdl-cell--4-col">
+                <div class="mdl-typography--text-center">
+                    <h3>Simple Layout</h3>
+                    <h4>Free Code Camp</h4>
+                    <a href="https://www.twitch.tv/freecodecamp" target="_blank">
+                        <h6 id="fccStatus"></h6>
+                    </a>
+                </div>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Logo</th>
+                        <th>Display Name</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                        <td>25</td>
+                        <td>$2.90</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                        <td>50</td>
+                        <td>$1.25</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                        <td>10</td>
+                        <td>$2.35</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var url1 = "https://api.twitch.tv/kraken/streams/freecodecamp?callback=?";
+        var following = [];
+
+        $.getJSON(url1, function(data1) {
+            if(data1.stream === null){
+                $('#fccStatus').html('Free Code Camp is currently ONLINE!');
+            } else {
+                $('#fccStatus').html('Free Code Camp is currently OFFLINE!');
+            }
+        });
+
+        var url2 =  "https://api.twitch.tv/kraken/users/freecodecamp/follows/channels/"
+        $.getJSON(url2, function(data2) {
+            for(var i = 0; i < data2.follows.length; i++) {
+                var displayName = data2.follows[i].channel.display_name;
+                following.push(displayName);
+            }
+            following.push("customer404");
+            following.push("brunofin");
+            following.push("ESL_SC2");
+        });
+    });
+</script>
+</body>
+</html>
