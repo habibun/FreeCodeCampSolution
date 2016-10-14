@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sum-all-numbers-in-a-range</title>
+    <script>
+        function sumAll(arr) {
+            var firstParam = arr[0];
+            var secondParam = arr[1];
+            var min = Math.min(firstParam, secondParam);
+            var max = Math.max(firstParam, secondParam);
+
+            var newArray = [];
+            for(var i = min; i <= max; i++){
+                newArray.push(i);
+            }
+
+            function getSum(total, currentValue){
+                return total + currentValue;
+            }
+            return newArray.reduce(getSum);
+        }
+
+        sumAll([1, 4]);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
