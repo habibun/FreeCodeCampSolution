@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pig Latin</title>
+    <script>
+        function translatePigLatin(str) {
+
+            function isVowel(char) {
+                if(char === "a" || char === "e" || char === "i" || char === "o" || char === "u"){
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+
+            if(isVowel(str.charAt(0))){
+                return str + "way";
+            }
+
+            var regex = /[aeiou]/gi;
+            var vowelIndex = str.indexOf(str.match(regex)[0]);
+            var splitBefore = str.substr(0,vowelIndex);
+            var splitAfter = str.substr(vowelIndex);
+            var newStr = splitAfter + splitBefore + "ay" ;
+
+//            return newStr;
+            console.log(newStr);
+        }
+
+        translatePigLatin("algorithm");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
