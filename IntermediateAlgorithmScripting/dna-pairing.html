@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DNA Pairing</title>
+    <script>
+        function pairElement(str) {
+            var newArray = [];
+
+            for(var i = 0; i < str.length; i++) {
+                if(str[i] == "G"){
+                    newArray.push(["G", "C"]);
+                } else if(str[i] == "C"){
+                    newArray.push(["C", "G"]);
+                } else if (str[i] == "A"){
+                    newArray.push(["A", "T"]);
+                } else if (str[i] == "T"){
+                    newArray.push(["T", "A"]);
+                }
+
+            }
+            console.log(newArray);
+            return newArray;
+        }
+
+        pairElement("GCG");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
