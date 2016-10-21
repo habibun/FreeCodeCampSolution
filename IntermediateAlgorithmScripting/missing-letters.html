@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Missing letters</title>
+    <script>
+        function fearNotLetter(str) {
+
+            var allStr = str.split("");
+            var strLength = str.length;
+            var firstUnicode = allStr[0].charCodeAt(0);
+
+            var j = -1;
+            for(var i = firstUnicode; i < firstUnicode + strLength; i++){
+                j++;
+                if(allStr[j].charCodeAt(0) != i){
+                    console.log(String.fromCharCode(i));
+                    return String.fromCharCode(i);
+                }
+            }
+            console.log(undefined);
+            return undefined;
+        }
+
+        fearNotLetter("abce");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
