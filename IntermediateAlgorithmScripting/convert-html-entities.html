@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Convert HTML Entities</title>
+    <script>
+        function convertHTML(str) {
+            str = str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,"&apos;");
+
+            console.log(str);
+            return str;
+        }
+
+        convertHTML("Dolce & Gabbana");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
