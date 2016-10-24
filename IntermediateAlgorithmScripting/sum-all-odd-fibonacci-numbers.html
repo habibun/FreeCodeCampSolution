@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sum All Odd Fibonacci Numbers</title>
+    <script>
+        function sumFibs(num) {
+            var previous = 0;
+            var current = 1;
+            var result = 0;
+
+            while(current <= num){
+
+                if (current % 2 !== 0){
+                    result += current;
+                }
+
+                current += previous;
+                previous = current - previous;
+            }
+            console.log(result);
+            return result;
+        }
+
+        sumFibs(4);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
