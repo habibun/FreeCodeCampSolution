@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sum All Primes</title>
+    <script>
+        function sumPrimes(num) {
+            var primes = [];
+            for (var i = 2; i <= num; i++) {
+                for (var j = 2; j <= i; j++) {
+                    if (i === j) {
+                        primes.push(i);
+                    }
+                    if (i % j === 0) {
+                        break;
+                    }
+                }
+            }
+            console.log(primes.reduce(function (total, currentValue) {
+                return total + currentValue;
+            }));
+
+            return primes.reduce(function (total, currentValue) {
+                return total + currentValue;
+            });
+        }
+
+        sumPrimes(977);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
