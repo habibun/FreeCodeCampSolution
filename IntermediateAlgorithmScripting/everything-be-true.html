@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Everything Be True</title>
+    <script>
+        function truthCheck(collection, pre) {
+            var counter = 0;
+            for (var c in collection) {
+                if (collection[c].hasOwnProperty(pre) && Boolean(collection[c][pre])) {
+                    counter++;
+                }
+            }
+
+            console.log(collection.length == counter);
+            return collection.length == counter;
+        }
+
+        truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
