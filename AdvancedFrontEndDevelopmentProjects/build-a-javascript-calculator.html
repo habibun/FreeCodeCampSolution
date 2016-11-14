@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build a JavaScript Calculator</title>
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <!--<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">-->
+</head>
+<body>
+
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="mdl-layout">
+            <div class="mdl-layout__content">
+                <div class="mdl-typography--text-center">
+                    <!--<h4>CALCULATOR</h4>-->
+                </div>
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" border="2px" align="center">
+                    <tbody>
+                        <tr>
+                            <td colspan="4">
+                                <input id="result" class="mdl-textfield mdl-js-textfield" type="text" value="0" readonly style="display: block; text-align: right">
+                                <input id="output" class="mdl-textfield mdl-js-textfield" type="text" value="0" readonly style="text-align: right">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Accent-colored flat button -->
+                                <button id="allClear" class="mdl-button mdl-js-button mdl-button--accent" value="0">
+                                    AC
+                                </button>
+                            </td>
+                            <td>
+                                <!-- Accent-colored flat button -->
+                                <button class="mdl-button mdl-js-button mdl-button--accent" id="clearEntry" value="0">
+                                    CE
+                                </button>
+                            </td>
+                            <td><button id="divide" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="/" onclick="setOutput(this.value);">/</button></td>
+                            <td>
+                                <button id="multiply" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="*" onclick="setOutput(this.value);">*</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="seven" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="7" onclick="setOutput(this.value);">7</button>
+                            </td>
+                            <td>
+                                <button id="eight" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="8" onclick="setOutput(this.value);">8</button>
+                            </td>
+                            <td>
+                                <button id="nine" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="9" onclick="setOutput(this.value);">9</button>
+                            </td>
+                            <td>
+                                <button id="minus" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="-" onclick="setOutput(this.value);">-</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="four" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="4" onclick="setOutput(this.value);">4</button>
+                            </td>
+                            <td>
+                                <button id="five" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="5" onclick="setOutput(this.value);">5</button>
+                            </td>
+                            <td>
+                                <button id="six" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="6" onclick="setOutput(this.value);">6</button>
+                            </td>
+                            <td>
+                                <button id="plus" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="+" onclick="setOutput(this.value);">+</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="one" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="1" onclick="setOutput(this.value);">1</button>
+                            </td>
+                            <td>
+                                <button id="two" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="2" onclick="setOutput(this.value);">2</button>
+                            </td>
+                            <td>
+                                <button id="three" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="3" onclick="setOutput(this.value);">3</button>
+                            </td>
+                            <td rowspan="2">
+                                <button id="equal" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="=" onclick="setOutput(this.value);">=</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">0</button></td>
+                            <td><button class="mdl-button mdl-js-button mdl-js-ripple-effect">.</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+
+    <!--<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>-->
+    <script>
+        var one = document.getElementById("one");
+        var result = document.getElementById("result");
+        var output = document.getElementById("output");
+        var equal = document.getElementById("equal");
+        var allClear = document.getElementById("allClear");
+        var clearEntry = document.getElementById("clearEntry");
+
+        allClear.addEventListener("click", function () {
+            result.value =  this.value;
+            output.value = this.value;
+        });
+
+        clearEntry.addEventListener("click", function () {
+            var regex = /[\+\-\*\/]/gi;
+            if(!regex.test(output.value)){
+                output.value =  this.value;
+                result.value =  this.value;
+            } else {
+                output.value = output.value.slice(0, -1);
+                result.value =  this.value;
+            }
+        });
+
+        equal.addEventListener("click", function() {
+            var newArray = output.value.slice();
+            var allOutput = newArray.split("");
+            var splitPoint = allOutput.indexOf("=");
+            var plus = allOutput.indexOf("+");
+            var minus = allOutput.indexOf("-");
+            var multiply = allOutput.indexOf("*");
+            var divide = allOutput.indexOf("/");
+            if(plus > 0){
+                var leftp = parseInt(newArray.slice(0, plus));
+                var rightp = parseInt(newArray.slice(plus));
+                var addition = leftp + rightp;
+                result.value = addition;
+                output.value = addition;
+            } else if(minus > 0){
+                var leftm = newArray.slice(0, minus);
+                var rightm = newArray.slice(minus+1, -1);
+                var subtraction = leftm - rightm;
+                result.value = subtraction;
+                output.value = subtraction;
+            }else if(multiply > 0){
+                var leftmu = newArray.slice(0, multiply);
+                var rightmu = newArray.slice(multiply+1, -1);
+                var multiplication = leftmu * rightmu;
+                result.value = multiplication;
+                output.value = multiplication;
+            }else if(divide > 0){
+                var leftd = newArray.slice(0, divide);
+                var rightd = newArray.slice(divide+1, -1);
+                var division = leftd / rightd;
+                result.value = division;
+                output.value = division;
+            }else {
+                var left = newArray.slice(0,splitPoint);
+                result.value = left;
+                output.value = left;
+            }
+        });
+
+        function setOutput(value){
+            if(output.value == 0){
+                output.value = value;
+            } else {
+                output.value += value;
+            }
+        }
+    </script>
+</div>
+</body>
+</html>
