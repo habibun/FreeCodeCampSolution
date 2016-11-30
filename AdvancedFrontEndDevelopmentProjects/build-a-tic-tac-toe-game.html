@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build a Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <style>
+        .demo-list-control {
+            width: 300px;
+        }
+
+        .demo-list-radio {
+            display: inline;
+        }
+
+        .mdl-card__media {
+            background-color: #e8e8e8;
+        }
+
+        #board.demo-list-control {
+            text-align: center;
+        }
+
+        #board.demo-list-control .mdl-list__item {
+            background-color: #b6b5ca;
+            border: 2px;
+            height:32%;
+            width: 32%;
+            display: inline-block;
+        }
+        .mdl-card__title {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout">
+        <main class="mdl-layout__content">
+            <div class="mdl-grid">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-card mdl-shadow--2dp">
+                    <!--<div class="mdl-card__title">
+                        Tic Tac Toe Game Setup
+                    </div>-->
+                    <div class="mdl-card__media">
+                        <div class="mdl-card__title">
+                            <h5 id="setupText" class="mdl-card__title-text">Tic Tac Toe Game Setup</h5>
+                        </div>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <!--start form step 1-->
+                        <fieldset id="firstStep">
+                            <p class="mdl-typography--title">How do you want to play?</p>
+                            <ul class="demo-list-control mdl-list">
+                                <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    One Player
+                                </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                    <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+                                      <input type="radio" id="list-option-1" class="mdl-radio__button" name="choosePlayer" value="onePlayer" />
+                                    </label>
+                                </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Two Player
+                                </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                    <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2">
+                                      <input type="radio" id="list-option-2" class="mdl-radio__button" name="choosePlayer" value="twoPlayer" />
+                                    </label>
+                                </span>
+                                </li>
+                            </ul>
+                        </fieldset>
+                        <!--start form step 2-->
+                        <fieldset id="secondStep">
+                            <p class="mdl-typography--title">Would you like to be X or O?</p>
+                            <ul class="demo-list-control mdl-list">
+                                <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    X
+                                </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                    <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3">
+                                      <input type="radio" id="list-option-3" class="mdl-radio__button" name="options" value="x" />
+                                    </label>
+                                </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    O
+                                </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                    <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-4">
+                                      <input type="radio" id="list-option-4" class="mdl-radio__button" name="options" value="o" />
+                                    </label>
+                                </span>
+                                </li>
+                            </ul>
+                        </fieldset>
+                        <!--start form step 3-->
+                        <fieldset id="thirdStep">
+                            <ul id="board" class="demo-list-control mdl-list">
+                                <!--first row-->
+                                <li id="a1" class="mdl-list__item"></li>
+                                <li id="a2" class="mdl-list__item"></li>
+                                <li id="a3" class="mdl-list__item"></li>
+                                <!--second row-->
+                                <li id="b1" class="mdl-list__item"></li>
+                                <li id="b2" class="mdl-list__item"></li>
+                                <li id="b3" class="mdl-list__item"></li>
+                                <!--third row-->
+                                <li id="c1" class="mdl-list__item"></li>
+                                <li id="c2" class="mdl-list__item"></li>
+                                <li id="c3" class="mdl-list__item"></li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <!--start form step 1-->
+                        <button id="nextButton" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Next
+                        </button>
+                        <!--start form step 2-->
+                        <button id="backButton" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Back
+                        </button>
+                        <!--start form step 3-->
+                        <button id="letsPlay" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Let's Play!
+                        </button>
+                        <p id="gameScore">
+                            <span class="mdl-chip mdl-chip--contact">
+                                <span id="symbolOne" class="mdl-chip__contact mdl-color--teal mdl-color-text--white"></span>
+                                <span class="mdl-chip__text"><span id="playerScore" class="mdl-badge" data-badge="0">Player 1</span></span>
+                            </span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="mdl-chip mdl-chip--contact">
+                                <span id="symbolTwo" class="mdl-chip__contact mdl-color--teal mdl-color-text--white"></span>
+                                <span class="mdl-chip__text"><span id="computerScore" class="mdl-badge" data-badge="0">Computer</span></span>
+                            </span>
+
+                            <!--<span id="playerScore" class="mdl-badge" data-badge="0">Player 1</span> &nbsp;&nbsp;&nbsp;-->
+                            <!--<span id="computerScore" class="mdl-badge" data-badge="0">Computer</span> &nbsp;&nbsp;&nbsp;-->
+                        </p>
+                        <section id="gameUtility">
+                            <hr>
+                            <button id="newGame" class="mdl-button mdl-js-button mdl-button--primary">
+                                New Game
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="resetAll" class="mdl-button mdl-js-button mdl-button--primary" onclick="location.reload();">
+                                Reset All
+                            </button>
+                        </section>
+                    </div>
+                </div>
+                <div class="mdl-layout-spacer">
+                    <section>
+                        <button id="showToastButton" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Toast</button>
+                        <div id="snackbarContainer" class="mdl-js-snackbar mdl-snackbar">
+                            <div class="mdl-snackbar__text"></div>
+                            <button class="mdl-snackbar__action" type="button"></button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script>
+        //snackbar
+        var snackbarContainer = document.querySelector('#snackbarContainer');
+        var showToastButton = document.querySelector('#showToastButton');
+        showToastButton.style.display = "none";
+
+        //form step
+        var firstStep = document.getElementById("firstStep");
+        var secondStep = document.getElementById("secondStep");
+        var thirdStep = document.getElementById("thirdStep");
+
+        //board
+        var board = document.getElementById('board');
+
+        //button
+        var nextButton = document.getElementById('nextButton');
+        var backButton = document.getElementById('backButton');
+        var letsPlay = document.getElementById('letsPlay');
+        var gameScore = document.getElementById('gameScore');
+        var gameUtility = document.getElementById('gameUtility');
+        var setupText = document.getElementById('setupText');
+
+        //dynamic symbol
+        var symbolOne = document.getElementById('symbolOne');
+        var symbolTwo = document.getElementById('symbolTwo');
+
+        //setup
+        var choosedPlayer;
+        var choosedSymbol;
+        var choosedSymbolTwo;
+
+        //score
+        var playerScore = document.getElementById('playerScore');
+        var computerScore = document.getElementById('computerScore');
+
+        //other variable
+        var turn = 0;
+        var xWin = false; // true if X wins
+        var oWin = false; // true if O wins
+        var ClickedBack = 0;
+
+        //board
+        var a1;
+        var a2;
+        var a3;
+        var b1;
+        var b2;
+        var b3;
+        var c1;
+        var c2;
+        var c3;
+
+        //hidden fieldset
+        secondStep.style.display = 'none';
+        thirdStep.style.display = 'none';
+
+        //hidden button
+        backButton.style.display = 'none';
+        letsPlay.style.display = 'none';
+        gameScore.style.display = 'none';
+        gameUtility.style.display = 'none';
+
+        nextButton.addEventListener("click", function(){
+            if(!choosedPlayer){
+                choosedPlayer = document.querySelector('input[name="choosePlayer"]:checked').value;
+
+                firstStep.style.display = 'none';
+                secondStep.style.display = 'initial';
+
+                backButton.style.display = 'initial';
+            } else if(choosedPlayer && ClickedBack == 1) {
+                firstStep.style.display = 'none';
+                secondStep.style.display = 'initial';
+
+                backButton.style.display = 'initial';
+                ClickedBack = 0;
+            }else if(choosedPlayer && !choosedSymbol) {
+                choosedSymbol = document.querySelector('input[name="options"]:checked').value;
+                firstStep.style.display = 'none';
+                secondStep.style.display = 'none';
+                thirdStep.style.display = 'initial';
+
+                nextButton.style.display = 'none';
+                backButton.style.display = 'none';
+                letsPlay.style.display = 'initial';
+                setupText.textContent = setupText.textContent.replace(setupText.textContent, 'Tic Tac Toe Game Ready!');
+            }else if(choosedPlayer && choosedSymbol) {
+                firstStep.style.display = 'none';
+                secondStep.style.display = 'none';
+                thirdStep.style.display = 'initial';
+
+                nextButton.style.display = 'none';
+                backButton.style.display = 'none';
+                letsPlay.style.display = 'initial';
+            }
+        });
+
+        backButton.addEventListener("click", function(){
+           if(choosedPlayer){
+               ClickedBack = 1;
+               firstStep.style.display = 'initial';
+               secondStep.style.display = 'none';
+
+               backButton.style.display = 'none';
+           }
+        });
+
+        letsPlay.addEventListener("click", function(){
+            if(choosedSymbol){
+                if(choosedSymbol == "x"){
+                    symbolOne.textContent = "x";
+                    symbolTwo.textContent = "o";
+                    choosedSymbolTwo = "o";
+                }else {
+                    symbolTwo.textContent = "x";
+                    symbolOne.textContent = "o";
+                    choosedSymbolTwo = "x";
+                }
+            }
+
+            letsPlay.style.display = 'none';
+            gameScore.style.display = 'initial';
+            gameUtility.style.display = 'initial';
+            setupText.textContent = setupText.textContent.replace(setupText.textContent, 'Tic Tac Toe Game Play!');
+            if(choosedPlayer == "twoPlayer"){
+                computerScore.textContent = computerScore.textContent.replace(computerScore.textContent, 'Player 2');
+            }
+
+            if(turn == 0){
+                snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Your turn!', timeout: 2000});
+            }
+
+            var boardItem = board.getElementsByTagName('li');
+            for(var i = 0, len = boardItem.length; i < len; i++) {
+                boardItem[i].onclick = function () {
+                    if(this.textContent == ""){
+                        if(choosedPlayer == "twoPlayer"){
+                            if(turn == 0){
+                                this.textContent = choosedSymbol;
+                                turn = 1;
+                                snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Player 2\'s turn!', timeout: 2000});
+                            } else {
+                                snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Your turn!', timeout: 2000});
+                                this.textContent = choosedSymbolTwo;
+                                turn = 0;
+                            }
+                            boardCheck();
+                            checkWin();
+                        }else if(choosedPlayer == "onePlayer"){
+                            this.textContent = choosedSymbol;
+                            boardCheck();
+                            checkWin();
+                            turn = 1;
+                            compMove();
+                            boardCheck();
+                            checkWin();
+                        }
+                    }
+                }
+            }
+        });
+
+        function checkWin() { // CHECKS IF X WON
+            if ((a1 == a2 && a1 == a3 && (a1 == choosedSymbol)) || //first row
+                    (b1 == b2 && b1 == b3 && (b1 == choosedSymbol)) || //second row
+                    (c1 == c2 && c1 == c3 && (c1 == choosedSymbol)) || //third row
+                    (a1 == b1 && a1 == c1 && (a1 == choosedSymbol)) || //first column
+                    (a2 == b2 && a2 == c2 && (a2 == choosedSymbol)) || //second column
+                    (a3 == b3 && a3 == c3 && (a3 == choosedSymbol)) || //third column
+                    (a1 == b2 && a1 == c3 && (a1 == choosedSymbol)) || //diagonal 1
+                    (a3 == b2 && a3 == c1 && (a3 == choosedSymbol)) //diagonal 2
+            ) {
+                xWin = true;
+                winAlert();
+
+            } else { // CHECKS IF O WON
+                if ((a1 == a2 && a1 == a3 && (a1 == choosedSymbolTwo)) || //first row
+                        (b1 == b2 && b1 == b3 && (b1 == choosedSymbolTwo)) || //second row
+                        (c1 == c2 && c1 == c3 && (c1 == choosedSymbolTwo)) || //third row
+                        (a1 == b1 && a1 == c1 && (a1 == choosedSymbolTwo)) || //first column
+                        (a2 == b2 && a2 == c2 && (a2 == choosedSymbolTwo)) || //second column
+                        (a3 == b3 && a3 == c3 && (a3 == choosedSymbolTwo)) || //third column
+                        (a1 == b2 && a1 == c3 && (a1 == choosedSymbolTwo)) || //diagonal 1
+                        (a3 == b2 && a3 == c1 && (a3 == choosedSymbolTwo)) //diagonal 2
+                ) {
+                    oWin = true;
+                    winAlert();
+                } else { // CHECKS FOR TIE GAME IF ALL CELLS ARE FILLED
+                    if (((a1 == choosedSymbol) || (a1 == choosedSymbolTwo)) && ((b1 == choosedSymbol) || (b1 == choosedSymbolTwo)) && ((c1 == choosedSymbol) || (c1 == choosedSymbolTwo)) && ((a2 == choosedSymbol) || (a2 == choosedSymbolTwo)) && ((b2 == choosedSymbol) || (b2 == choosedSymbolTwo)) && ((c2 == choosedSymbol) || (c2 == choosedSymbolTwo)) && ((a3 == choosedSymbol) || (a3 == choosedSymbolTwo)) && ((b3 == choosedSymbol) || (b3 == choosedSymbolTwo)) && ((c3 == choosedSymbol) || (c3 == choosedSymbolTwo))) {
+                        alert("It's a tie!");
+                        confirmationBox();
+                    }
+                }
+            }
+        };
+
+        function winAlert() {
+            if (xWin == true) {
+                playerScore.dataset.badge++;
+                alert("You won!");
+                confirmationBox();
+            } else {
+                if (oWin == true) {
+                    computerScore.dataset.badge++;
+                    alert("Sorry, you lose!");
+                    confirmationBox();
+                }
+            }
+        };
+
+        function confirmationBox()
+        {
+            var confirmMessage = confirm("Do you want to play again?");
+            if(confirmMessage == true){
+                $('#newGame').click();
+            } else {
+                location.reload();
+            }
+        }
+
+        $('#newGame').click(function () {
+            a1 = $('#a1').text("");
+            b1 = $('#b1').text("");
+            c1 = $('#c1').text("");
+            a2 = $('#a2').text("");
+            b2 = $('#b2').text("");
+            c2 = $('#c2').text("");
+            a3 = $('#a3').text("");
+            b3 = $('#b3').text("");
+            c3 = $('#c3').text("");
+            xWin = false;
+            oWin = false;
+        });
+
+        function boardCheck () {
+            a1 = $('#a1').html().trim();
+            a2 = $('#a2').html().trim();
+            a3 = $('#a3').html().trim();
+            b1 = $('#b1').html().trim();
+            b2 = $('#b2').html().trim();
+            b3 = $('#b3').html().trim();
+            c1 = $('#c1').html().trim();
+            c2 = $('#c2').html().trim();
+            c3 = $('#c3').html().trim();
+        };
+
+        function compMove() {
+            if (a1 == "" && ((a3 == choosedSymbol && a2 == choosedSymbol) || (c3 == choosedSymbol && b2 == choosedSymbol) || (c1 == choosedSymbol && b1 == choosedSymbol))) {
+                $('#a1').text(choosedSymbolTwo);
+                turn = 0;
+            } else {
+                if (a2 == "" && ((a1 == choosedSymbol && a3 == choosedSymbol) || (c2 == choosedSymbol && b2 == choosedSymbol))) {
+                    $('#a2').text(choosedSymbolTwo);
+                    turn = 0;
+                }
+                else{
+                    if (a3 == "" && ((a1 == choosedSymbol && a2 == choosedSymbol) || (c1 == choosedSymbol && b2 == choosedSymbol) || (c3 == choosedSymbol && b3 == choosedSymbol))) {
+                        $('#a3').text(choosedSymbolTwo);
+                        turn = 0;
+                    }
+                    else{
+                        if (c3 == "" && ((c1 == choosedSymbol && c2 == choosedSymbol) || (a1 == choosedSymbol && b2 == choosedSymbol) || (a3 == choosedSymbol && b3 == choosedSymbol))) {
+                            $('#c3').text(choosedSymbolTwo);
+                            turn = 0;
+                        }
+                        else{
+                            if (c1 == "" && ((c3 == choosedSymbol && c2 == choosedSymbol) || (a3 == choosedSymbol && b2 == choosedSymbol) || (a1 == choosedSymbol && b1 == choosedSymbol))) {
+                                $('#c1').text(choosedSymbolTwo);
+                                turn = 0;
+                            }
+                            else{
+                                if (c2 == "" && ((c3 == choosedSymbol && c1 == choosedSymbol) || (a2 == choosedSymbol && b2 == choosedSymbol))) {
+                                    $('#c2').text(choosedSymbolTwo);
+                                    turn = 0;
+                                }
+                                else{
+                                    if (b1 == "" && ((b3 == choosedSymbol && b2 == choosedSymbol) || (a1 == choosedSymbol && c1 == choosedSymbol))) {
+                                        $('#b1').text(choosedSymbolTwo);
+                                        turn = 0;
+                                    }
+                                    else{
+                                        if (b3 == "" && ((a3 == choosedSymbol && c3 == choosedSymbol) || (b2 == choosedSymbol && b1 == choosedSymbol))) {
+                                            $('#b3').text(choosedSymbolTwo);
+                                            turn = 0;
+                                        }
+                                        else{
+                                            if (b2 == "" && ((a3 == choosedSymbol && c1 == choosedSymbol) || (c3 == choosedSymbol && a1 == choosedSymbol) || (b3 == choosedSymbol && b1 == choosedSymbol) || (c2 == choosedSymbol && a2 == choosedSymbol))) {
+                                                $('#b2').text(choosedSymbolTwo);
+                                                turn = 0;
+                                            }
+                                            else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
+                                                if (b2 == "") {
+                                                    $('#b2').text(choosedSymbolTwo);
+                                                    turn = 0;
+
+                                                }
+                                                else{
+                                                    if (a1 == "") {
+                                                        $('#a1').text(choosedSymbolTwo);
+                                                        turn = 0;
+
+                                                    }
+                                                    else{
+                                                        if (c3 == "") {
+                                                            $('#c3').text(choosedSymbolTwo);
+                                                            turn = 0;
+
+                                                        }
+                                                        else {
+                                                            if (c2 == "") {
+                                                                $('#c2').text(choosedSymbolTwo);
+                                                                turn = 0;
+
+                                                            }
+                                                            else{
+                                                                if (b1 == "") {
+                                                                    $('#b1').text(choosedSymbolTwo);
+                                                                    turn = 0;
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>
