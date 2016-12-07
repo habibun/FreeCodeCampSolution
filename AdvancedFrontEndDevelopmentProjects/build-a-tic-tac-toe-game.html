@@ -315,18 +315,20 @@
                                 turn = 1;
                                 snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Player 2\'s turn!', timeout: 2000});
                             } else {
-                                snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Your turn!', timeout: 2000});
                                 this.textContent = choosedSymbolTwo;
                                 turn = 0;
+                                snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Your turn!', timeout: 2000});
                             }
                             boardCheck();
                             checkWin();
                         }else if(choosedPlayer == "onePlayer"){
                             this.textContent = choosedSymbol;
+                            snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Player 2\'s turn!', timeout: 2000});
                             boardCheck();
                             checkWin();
                             turn = 1;
                             compMove();
+                            snackbarContainer.MaterialSnackbar.showSnackbar({message: 'Your turn!', timeout: 2000});
                             boardCheck();
                             checkWin();
                         }
